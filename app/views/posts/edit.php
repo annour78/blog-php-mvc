@@ -1,8 +1,9 @@
 <div class="admin-form-container">
     <h2>Edit Post</h2>
 
-    <form action="/blog/public/admin/post/edit/<?= $post['id'] ?>" method="POST" 
+    <form action="/Blog/public/admin/post/edit/<?= $post['id'] ?>" method="POST" 
           enctype="multipart/form-data" class="admin-form">
+        <input type="hidden" name="csrf_token" value="<?= $this->generateCsrfToken() ?>">
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" id="title" name="title" required 
@@ -26,14 +27,14 @@
         <div class="form-group">
             <label for="image">Image (optional)</label>
             <?php if ($post['image']): ?>
-                <img src="/blog/public/uploads/<?= htmlspecialchars($post['image']) ?>" 
+                <img src="/Blog/public/uploads/<?= htmlspecialchars($post['image']) ?>" 
                      alt="Current image" style="max-width: 200px; display: block; margin-bottom: 10px;">
             <?php endif; ?>
             <input type="file" id="image" name="image" accept="image/*">
         </div>
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">Update Post</button>
-            <a href="/blog/public/admin" class="btn btn-secondary">Cancel</a>
+            <a href="/Blog/public/admin" class="btn btn-secondary">Cancel</a>
         </div>
     </form>
 </div>

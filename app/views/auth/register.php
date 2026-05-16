@@ -5,7 +5,8 @@
         <div class="alert alert-error"><?= htmlspecialchars($error) ?></div>
     <?php endif; ?>
 
-    <form action="/blog/public/register" method="POST" class="auth-form">
+    <form action="/Blog/public/register" method="POST" class="auth-form">
+        <input type="hidden" name="csrf_token" value="<?= $this->generateCsrfToken() ?>">
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" id="username" name="username" required placeholder="Enter your username">
@@ -23,6 +24,6 @@
             <input type="password" id="confirm_password" name="confirm_password" required placeholder="Confirm your password">
         </div>
         <button type="submit" class="btn btn-primary">Register</button>
-        <p>Already have an account? <a href="/blog/public/login">Login here</a></p>
+        <p>Already have an account? <a href="/Blog/public/login">Login here</a></p>
     </form>
 </div>
