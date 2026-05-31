@@ -1,29 +1,36 @@
-<div class="auth-container">
-    <h2>Register</h2>
+<div class="admin-form-container">
+    <h2>Create New Post</h2>
 
-    <?php if (isset($error)): ?>
-        <div class="alert alert-error"><?= htmlspecialchars($error) ?></div>
-    <?php endif; ?>
-
-    <form action="/Blog/public/register" method="POST" class="auth-form">
+    <form action="/Blog/public/admin/post/create" method="POST" 
+          enctype="multipart/form-data" class="admin-form">
         <input type="hidden" name="csrf_token" value="<?= $this->generateCsrfToken() ?>">
         <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" required placeholder="Enter your username">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" required placeholder="Enter post title">
         </div>
         <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required placeholder="Enter your email">
+            <label for="category_id">Category</label>
+            <select id="category_id" name="category_id" required>
+                <option value="">Select a category</option>
+                <?php foreach ($categories as $category): ?>
+                    <option value="<?= $category['id'] ?>">
+                        <?= htmlspecialchars($category['name']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
         </div>
         <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required placeholder="Enter your password">
+            <label for="content">Content</label>
+            <textarea id="content" name="content" required rows="10" 
+                      placeholder="Write your post content..."></textarea>
         </div>
         <div class="form-group">
-            <label for="confirm_password">Confirm Password</label>
-            <input type="password" id="confirm_password" name="confirm_password" required placeholder="Confirm your password">
+            <label for="image">Image (optional)</label>
+            <input type="file" id="image" name="image" accept="image/*">
         </div>
-        <button type="submit" class="btn btn-primary">Register</button>
-        <p>Already have an account? <a href="/Blog/public/login">Login here</a></p>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Publish Post</button>
+            <a href="/Blog/public/admin" class="btn btn-secondary">Cancel</a>
+        </div>
     </form>
 </div>
